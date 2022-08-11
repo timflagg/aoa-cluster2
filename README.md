@@ -3,12 +3,23 @@
 ## version 2.0.9
 This repo provides a multitenant capable GitOps workflow structure that can be forked and used to demonstrate the deployment and configuration of a multi-cluster mesh demo as code using the Argo CD app-of-apps pattern.
 
+This repo is meant to be deployed along with the following repos to create the entire High Level Architecture diagram below.
+- https://github.com/ably77/aoa-mgmt
+- https://github.com/ably77/aoa-cluster1
+
 # Prerequisites 
-- 1 Kubernetes Cluster
+- mgmt cluster deployed with gloo mesh installed. start with link above if needed
+- Additional Kubernetes Cluster
     - This demo has been tested on 1x `n2-standard-4` (gke), `m5.xlarge` (aws), or `Standard_DS3_v2` (azure) instance for `cluster2` cluster
 
 # High Level Architecture
-![High Level Architecture](images/aoa-1a.png)
+![High Level Architecture](images/aoa-full.png)
+
+# What this repo deploys
+![mgmt components](images/aoa-cluster2.png)
+
+## Notable Differences
+- `cluster2` does not have a North/South Ingress Gateway, all traffic to services in this cluster are accessed through the East/West gateway
 
 # Getting Started
 Run:
