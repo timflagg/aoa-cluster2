@@ -13,7 +13,7 @@ This repo is meant to be deployed along with the following repos to create the e
     - This demo has been tested on 1x `n2-standard-4` (gke), `m5.xlarge` (aws), or `Standard_DS3_v2` (azure) instance for `cluster2` cluster
 
 # High Level Architecture
-![High Level Architecture](images/aoa-full.png)
+![High Level Architecture](images/aoa-fulla.png)
 
 # What this repo deploys
 ![mgmt components](images/aoa-cluster2.png)
