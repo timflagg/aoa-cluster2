@@ -20,6 +20,7 @@ This repo is meant to be deployed along with the following repos to create the e
 
 ## Notable Differences
 - `cluster2` does not have a North/South Ingress Gateway, all traffic to services in this cluster are accessed through the East/West gateway
+- `cluster2` does not have the gloo-mesh-addons deployed
 
 # Getting Started
 Run:
