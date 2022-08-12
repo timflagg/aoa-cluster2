@@ -1,6 +1,6 @@
 # gloo-mesh-demo-aoa
 
-## version 2.0.9
+## version 2.1.0-beta18
 This repo provides a multitenant capable GitOps workflow structure that can be forked and used to demonstrate the deployment and configuration of a multi-cluster mesh demo as code using the Argo CD app-of-apps pattern.
 
 This repo is meant to be deployed along with the following repos to create the entire High Level Architecture diagram below.
@@ -16,7 +16,7 @@ This repo is meant to be deployed along with the following repos to create the e
 ![High Level Architecture](images/aoa-fulla.png)
 
 # What this repo deploys
-![mgmt components](images/aoa-cluster2.png)
+![cluster2 components](images/aoa-cluster2.png)
 
 ## Notable Differences
 - `cluster2` does not have a North/South Ingress Gateway, all traffic to services in this cluster are accessed through the East/West gateway
@@ -37,13 +37,7 @@ Note:
 The app-of-apps pattern uses a generic Argo Application to sync all manifests in a particular Git directory, rather than directly point to a Kustomize, YAML, or Helm configuration. Anything pushed into the `environment/<overlay>/active` directory is deployed by it's corresponding app-of-app
 ```
 environment
-├── apps
-│   ├── active
-│   │   ├── bookinfo-backends-dyaml.yaml
-│   │   ├── bookinfo-frontends-dyaml.yaml
-│   │   └── httpbin-in-mesh.yaml
-│   ├── apps-aoa.yaml
-├── cluster-config
+├── wave-1
 │   ├── active
 │   │   ├── bookinfo-backends-ns.yaml
 │   │   ├── bookinfo-frontends-ns.yaml
@@ -57,19 +51,25 @@ environment
 │   │   ├── istio-system-ns.yaml
 │   │   ├── relay-identity-token-secret.yaml
 │   │   └── relay-root-ca.yaml
-│   ├── cluster-config-aoa.yaml
-└── infra
+│   └── wave-1-aoa.yaml
+├── wave-2
+│   ├── active
+│   │   ├── agent-cert.yaml
+│   │   ├── clusterissuer.yaml
+│   │   ├── grafana.yaml
+│   │   ├── issuer.yaml
+│   │   ├── istio-base.yaml
+│   │   ├── istio-eastwestgateway.yaml
+│   │   ├── istiod-1-13.yaml
+│   │   ├── kiali.yaml
+│   │   └── prometheus.yaml
+│   └── wave-2-aoa.yaml
+└── wave-3
     ├── active
-    │   ├── agent-cert.yaml
-    │   ├── clusterissuer.yaml
-    │   ├── grafana.yaml
-    │   ├── issuer.yaml
-    │   ├── istio-base.yaml
-    │   ├── istio-eastwestgateway.yaml
-    │   ├── istiod-1-13.yaml
-    │   ├── kiali.yaml
-    │   └── prometheus.yaml
-    ├── infra-aoa.yaml
+    │   ├── bookinfo-backends-dyaml.yaml
+    │   ├── bookinfo-frontends-dyaml.yaml
+    │   └── httpbin-in-mesh.yaml
+    └── wave-3-aoa.yaml
 ```
 
 # forking this repo
