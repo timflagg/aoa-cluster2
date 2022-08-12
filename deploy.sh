@@ -8,7 +8,7 @@
 # rename your context if necessary
 cluster_context="cluster2"
 # comma separated list
-environment_overlays="apps,cluster-config,infra"
+environment_overlays="cluster-config,infra,apps"
 
 # check to see if defined contexts exist
 if [[ $(kubectl config get-contexts | grep ${cluster_context}) == "" ]] ; then
