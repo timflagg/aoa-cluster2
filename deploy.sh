@@ -10,6 +10,8 @@ cluster_context="cluster2"
 # need to call our mgmt server context to discover LB address
 mgmt_context="mgmt"
 gloo_mesh_version="2.0.9"
+# comma separated list
+environment_overlays="cluster-config,infra,apps"
 
 # check to see if defined contexts exist
 if [[ $(kubectl config get-contexts | grep ${mgmt_context}) == "" ]] || [[ $(kubectl config get-contexts | grep ${cluster_context}) == "" ]]; then
@@ -26,20 +28,11 @@ cd ..
 # wait for argo cluster rollout
 ./tools/wait-for-rollout.sh deployment argocd-server argocd 20 ${cluster_context}
 
-# deploy cluster config aoa
-kubectl apply -f platform-owners/${cluster_context}/${cluster_context}-cluster-config.yaml --context ${cluster_context}
-
-# deploy infra app-of-apps
-kubectl apply -f platform-owners/${cluster_context}/${cluster_context}-infra.yaml --context ${cluster_context}
-
-# wait for completion of gloo-mesh install
-#./tools/wait-for-rollout.sh deployment gloo-mesh-mgmt-server gloo-mesh 10 ${cluster_context}
-
-# deploy environment apps aoa
-kubectl apply -f platform-owners/${cluster_context}/${cluster_context}-apps.yaml --context ${cluster_context}
-
-# deploy mesh config aoa
-#kubectl apply -f platform-owners/${cluster_context}/${cluster_context}-mesh-config.yaml --context ${cluster_context}
+# deploy app of apps
+for i in $(echo ${environment_overlays} | sed "s/,/ /g"); do
+  kubectl apply -f environment/${i}/${i}-aoa.yaml --context ${cluster_context}
+  sleep 20
+done
 
 # register clusters to gloo mesh with helm
 
@@ -74,7 +67,7 @@ spec:
         - name: relay.authority
           value: 'gloo-mesh-mgmt-server.gloo-mesh'
         - name: relay.clientTlsSecret.name
-          value: 'gloo-mesh-agent-cluster2-tls-cert'
+          value: 'gloo-mesh-agent-${cluster_context}-tls-cert'
         - name: relay.clientTlsSecret.namespace
           value: 'gloo-mesh'
         - name: relay.rootTlsSecret.name
@@ -100,3 +93,14 @@ EOF
 
 # wait for completion of bookinfo install
 ./tools/wait-for-rollout.sh deployment productpage-v1 bookinfo-frontends 10 ${cluster_context}
+
+# echo port-forward commands
+echo
+echo "access argocd dashboard:"
+echo "kubectl port-forward svc/argocd-server -n argocd 9999:443 --context ${cluster_context}"
+echo
+echo "navigate to http://localhost:9999/argo in your browser"
+echo
+echo "username: admin"
+echo "password: solo.io"
+
