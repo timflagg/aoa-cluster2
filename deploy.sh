@@ -67,7 +67,7 @@ spec:
         - name: relay.authority
           value: 'gloo-mesh-mgmt-server.gloo-mesh'
         - name: relay.clientTlsSecret.name
-          value: 'gloo-mesh-agent-cluster1-tls-cert'
+          value: 'gloo-mesh-agent-${cluster_context}-tls-cert'
         - name: relay.clientTlsSecret.namespace
           value: 'gloo-mesh'
         - name: relay.rootTlsSecret.name
