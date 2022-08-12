@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: meta-cluster2-apps
+  name: meta-cluster2-infra
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
@@ -9,8 +9,8 @@ spec:
   project: default
   source:
     repoURL: https://github.com/ably77/aoa-cluster2/
-    targetRevision: refactor
-    path: environment/apps/active/
+    targetRevision: HEAD
+    path: environments/cluster2/infra/active/
   destination:
     server: https://kubernetes.default.svc
   syncPolicy:
