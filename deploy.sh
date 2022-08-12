@@ -29,7 +29,7 @@ cd ..
 # deploy app of apps
 for i in $(echo ${environment_overlays} | sed "s/,/ /g"); do
   kubectl apply -f environment/${i}/${i}-aoa.yaml --context ${cluster_context}
-  sleep 5
+  sleep 20
 done
 
 # register clusters to gloo mesh with helm
