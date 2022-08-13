@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: meta-cluster2-apps
+  name: wave-2-aoa
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/ably77/aoa-cluster2/
     targetRevision: HEAD
-    path: environment/apps/active/
+    path: environment/wave-2/active/
   destination:
     server: https://kubernetes.default.svc
   syncPolicy:

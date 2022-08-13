@@ -9,9 +9,9 @@
 cluster_context="cluster2"
 # need to call our mgmt server context to discover LB address
 mgmt_context="mgmt"
-gloo_mesh_version="2.0.9"
-# comma separated list
-environment_overlays="cluster-config,infra,apps"
+gloo_mesh_version="2.1.0-beta18"
+# number of app waves in the environments directory
+environment_waves="3"
 
 # check to see if defined contexts exist
 if [[ $(kubectl config get-contexts | grep ${mgmt_context}) == "" ]] || [[ $(kubectl config get-contexts | grep ${cluster_context}) == "" ]]; then
@@ -28,20 +28,19 @@ cd ..
 # wait for argo cluster rollout
 ./tools/wait-for-rollout.sh deployment argocd-server argocd 20 ${cluster_context}
 
-# deploy app of apps
-for i in $(echo ${environment_overlays} | sed "s/,/ /g"); do
-  kubectl apply -f environment/${i}/${i}-aoa.yaml --context ${cluster_context}
-  sleep 20
+# deploy app of app waves
+for i in $(seq ${environment_waves}); do 
+  kubectl apply -f environment/wave-${i}/wave-${i}-aoa.yaml --context ${cluster_context}; 
 done
 
-# register clusters to gloo mesh with helm
-
+# discover gloo mesh endpoint with kubectl
 until [ "${SVC}" != "" ]; do
   SVC=$(kubectl --context ${mgmt_context} -n gloo-mesh get svc gloo-mesh-mgmt-server -o jsonpath='{.status.loadBalancer.ingress[0].*}')
   echo waiting for gloo mesh management server LoadBalancer IP to be detected
   sleep 2
 done
 
+# register clusters to gloo mesh with helm
 kubectl apply --context ${cluster_context} -f- <<EOF
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -103,4 +102,3 @@ echo "navigate to http://localhost:9999/argo in your browser"
 echo
 echo "username: admin"
 echo "password: solo.io"
-
