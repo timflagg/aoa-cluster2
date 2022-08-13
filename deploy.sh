@@ -30,7 +30,9 @@ cd ..
 
 # deploy app of app waves
 for i in $(seq ${environment_waves}); do 
-  kubectl apply -f environment/wave-${i}/wave-${i}-aoa.yaml --context ${cluster_context}; 
+  kubectl apply -f environment/wave-${i}/wave-${i}-aoa.yaml --context ${cluster_context};
+  #TODO: add test script if statement
+  sleep 20;  
 done
 
 # discover gloo mesh endpoint with kubectl
