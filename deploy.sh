@@ -7,15 +7,12 @@
 # please use `kubectl config rename-contexts <current_context> <target_context>` to
 # rename your context if necessary
 cluster_context="cluster2"
-# need to call our mgmt server context to discover LB address
-mgmt_context="mgmt"
-gloo_mesh_version="2.1.0-beta18"
 # number of app waves in the environments directory
 environment_waves="3"
 
 # check to see if defined contexts exist
-if [[ $(kubectl config get-contexts | grep ${mgmt_context}) == "" ]] || [[ $(kubectl config get-contexts | grep ${cluster_context}) == "" ]]; then
-  echo "Check Failed: Either ${mgmt_context} or ${cluster_context} context does not exist. Please check to see if you have the clusters available"
+if [[ $(kubectl config get-contexts | grep ${cluster_context}) == "" ]] ; then
+  echo "Check Failed: ${cluster_context} context does not exist. Please check to see if you have the clusters available"
   echo "Run 'kubectl config get-contexts' to see currently available contexts. If the clusters are available, please make sure that they are named correctly. Default is ${cluster_context}"
   exit 1;
 fi
@@ -31,76 +28,20 @@ cd ..
 # deploy app of app waves
 for i in $(seq ${environment_waves}); do 
   kubectl apply -f environment/wave-${i}/wave-${i}-aoa.yaml --context ${cluster_context};
-  #TODO: add test script if statement
-  sleep 20;  
+  # run test script
+  ./environment/wave-${i}/test.sh 
 done
-
-# discover gloo mesh endpoint with kubectl
-until [ "${SVC}" != "" ]; do
-  SVC=$(kubectl --context ${mgmt_context} -n gloo-mesh get svc gloo-mesh-mgmt-server -o jsonpath='{.status.loadBalancer.ingress[0].*}')
-  echo waiting for gloo mesh management server LoadBalancer IP to be detected
-  sleep 2
-done
-
-# register clusters to gloo mesh with helm
-kubectl apply --context ${cluster_context} -f- <<EOF
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: gm-enterprise-agent-${cluster_context}
-  namespace: argocd
-spec:
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: gloo-mesh
-  source:
-    repoURL: 'https://storage.googleapis.com/gloo-mesh-enterprise/gloo-mesh-agent'
-    targetRevision: ${gloo_mesh_version}
-    chart: gloo-mesh-agent
-    helm:
-      valueFiles:
-        - values.yaml
-      parameters:
-        - name: cluster
-          value: '${cluster_context}'
-        - name: relay.serverAddress
-          value: '${SVC}:9900'
-        - name: relay.authority
-          value: 'gloo-mesh-mgmt-server.gloo-mesh'
-        - name: relay.clientTlsSecret.name
-          value: 'gloo-mesh-agent-${cluster_context}-tls-cert'
-        - name: relay.clientTlsSecret.namespace
-          value: 'gloo-mesh'
-        - name: relay.rootTlsSecret.name
-          value: 'relay-root-tls-secret'
-        - name: relay.rootTlsSecret.namespace
-          value: 'gloo-mesh'
-        - name: rate-limiter.enabled
-          value: 'false'
-        - name: ext-auth-service.enabled
-          value: 'false'
-        # enabled for future vault integration
-        - name: istiodSidecar.createRoleBinding
-          value: 'true'
-  syncPolicy:
-    automated:
-      prune: false
-      selfHeal: false
-    syncOptions:
-    - Replace=true
-    - ApplyOutOfSyncOnly=true
-  project: default
-EOF
-
-# wait for completion of bookinfo install
-./tools/wait-for-rollout.sh deployment productpage-v1 bookinfo-frontends 10 ${cluster_context}
 
 # echo port-forward commands
 echo
+echo "access gloo mesh dashboard:"
+echo "kubectl port-forward -n gloo-mesh svc/gloo-mesh-ui 8090 --context ${cluster_context}"
+echo 
 echo "access argocd dashboard:"
 echo "kubectl port-forward svc/argocd-server -n argocd 9999:443 --context ${cluster_context}"
 echo
-echo "navigate to http://localhost:9999/argo in your browser"
+echo "navigate to http://localhost:8090 in your browser for the Gloo Mesh UI"
+echo "navigate to http://localhost:9999/argo in your browser for argocd"
 echo
 echo "username: admin"
 echo "password: solo.io"
