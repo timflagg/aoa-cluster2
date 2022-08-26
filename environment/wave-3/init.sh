@@ -8,7 +8,7 @@
 cluster_context="cluster2"
 # need to call our mgmt server context to discover LB address
 mgmt_context="mgmt"
-gloo_mesh_version="2.1.0-beta18"
+gloo_mesh_version="2.1.0-beta23"
 
 # discover gloo mesh endpoint with kubectl
 until [ "${SVC}" != "" ]; do
