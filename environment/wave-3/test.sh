@@ -5,6 +5,9 @@ cluster_context="cluster2"
 # wait for completion of bookinfo install
 ./tools/wait-for-rollout.sh deployment productpage-v1 bookinfo-frontends 10 ${cluster_context}
 
+# wait for completion of httpbin install
+./tools/wait-for-rollout.sh deployment in-mesh httpbin 10 ${cluster_context}
+
 # echo port-forward commands
 echo 
 echo "access argocd dashboard:"
