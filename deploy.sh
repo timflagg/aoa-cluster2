@@ -27,7 +27,10 @@ cd ..
 
 # deploy app of app waves
 for i in $(seq ${environment_waves}); do 
+  # run init script if it exists
+  [[ -f "environment/wave-${i}/init.sh" ]] && ./environment/wave-${i}/init.sh
+  # deploy aoa wave
   kubectl apply -f environment/wave-${i}/wave-${i}-aoa.yaml --context ${cluster_context};
-  # run test script
-  ./environment/wave-${i}/test.sh 
+  # run test script if it exists
+  [[ -f "environment/wave-${i}/test.sh" ]] && ./environment/wave-${i}/test.sh
 done
