@@ -1,4 +1,4 @@
 #!/bin/bash
 
-echo hi
+echo "nothing in init script yet"
 
