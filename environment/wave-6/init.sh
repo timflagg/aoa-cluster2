@@ -1,5 +1,4 @@
 #!/bin/bash
 
-echo "starting wave-6"
-echo "wave-6 description:"
+echo "wave description:"
 echo "deploy httpbin app"

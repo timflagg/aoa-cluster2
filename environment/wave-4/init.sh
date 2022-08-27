@@ -1,7 +1,6 @@
 #!/bin/bash
 
-echo "starting wave-4"
-echo "wave-4 description:"
+echo "wave description:"
 echo "deploy and register gloo-mesh agent"
 
 # replace the parameter below with your designated cluster context
