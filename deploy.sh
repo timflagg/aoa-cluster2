@@ -8,7 +8,7 @@
 # rename your context if necessary
 gloo_mesh_version=${1:-2.1.0-beta23}
 environment_overlay=${2:-prod} # prod, qa, dev, base
-cluster_context=${3:-cluster1}
+cluster_context=${3:-cluster2}
 mgmt_context=${4:-mgmt}
 
 
