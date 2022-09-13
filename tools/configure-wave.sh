@@ -3,9 +3,9 @@
 
 wave_name=${1:-""}
 environment_overlay=${2:-prod} # prod, qa, dev, base
-cluster_context=${3:-cluster1}
+cluster_context=${3:-cluster2}
 github_username=${4:-ably77}
-repo_name=${5:-aoa-cluster1}
+repo_name=${5:-aoa-cluster2}
 target_branch=${6:-HEAD}
 
 

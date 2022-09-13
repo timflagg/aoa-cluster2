@@ -6,7 +6,7 @@
 #
 # please use `kubectl config rename-contexts <current_context> <target_context>` to
 # rename your context if necessary
-cluster_context=${1:-mgmt}
+cluster_context=${1:-cluster2}
 environment_overlay=${2:-prod} # prod, qa, dev, base
 
 # configure

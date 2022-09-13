@@ -4,7 +4,7 @@
 # please use `kubectl config rename-contexts <current_context> <target_context>` to
 # rename your context if necessary
 gloo_mesh_version=${1:-2.1.0-beta23}
-cluster_context=${2:-cluster1}
+cluster_context=${2:-cluster2}
 # need to call our mgmt server context to discover LB address
 mgmt_context=${3:-mgmt}
 
