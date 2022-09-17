@@ -21,6 +21,8 @@ kind: KubernetesCluster
 metadata:
   name: ${cluster_context}
   namespace: gloo-mesh
+  labels:
+    roottrust: shared
 spec:
   clusterDomain: cluster.local
 EOF
