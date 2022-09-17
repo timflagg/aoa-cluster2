@@ -7,7 +7,7 @@
 # please use `kubectl config rename-contexts <current_context> <target_context>` to
 # rename your context if necessary
 gloo_mesh_version=${1:-""}
-environment_overlay=${2:-prod} # prod, qa, dev, base
+environment_overlay=${2:-""} # prod, qa, dev, base
 cluster_context=${3:-cluster2}
 mgmt_context=${4:-mgmt}
 github_username=${5:-ably77}
@@ -27,6 +27,14 @@ if [[ ${gloo_mesh_version} == "" ]]
     # provide license key
     echo "Please provide the gloo-mesh agent version to use:"
     read gloo_mesh_version
+fi
+
+# check to see if environment overlay variable was passed through, if not prompt for it
+if [[ ${environment_overlay} == "" ]]
+  then
+    # provide environment overlay
+    echo "Please provide the environment overlay to use (i.e. prod, dev, qa):"
+    read environment_overlay
 fi
 
 # install argocd
