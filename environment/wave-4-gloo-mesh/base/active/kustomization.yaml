@@ -7,4 +7,5 @@ resources:
 - agent-cert.yaml
 - clusterissuer.yaml
 - gloo-mesh-addons.yaml
+- gloo-mesh-crds.yaml
 - issuer.yaml
