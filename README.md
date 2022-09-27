@@ -33,12 +33,12 @@ This repo is meant to be deployed along with the following repos to create the e
 # Getting Started
 Run:
 ```
-./deploy.sh $LICENSE_KEY $cluster_context        # deploys on mgmt cluster by default if no input
+./deploy.sh $gloo_mesh_version $environment_overlay $cluster_context
 ```
-The script will prompt you for a Gloo Mesh Enterprise license key if not provided as an input parameter
 
 Note:
-- By default, the script will deploy into a cluster context named `mgmt`if not passed in
+- - The script will prompt you for the gloo mesh version and environment overlay if not provided.
+- By default, the script will deploy into a cluster context named `cluster2`if not passed in
 - Context parameters can be changed from defaults by passing in variables in the `deploy.sh` A check is done to ensure that the defined contexts exist before proceeding with the installation. Note that the character `_` is an invalid value if you are replacing default contexts
 - Although you may change the contexts where apps are deployed as describe above, the Gloo Mesh and Istio cluster names will remain stable references (i.e. `mgmt`, `cluster1`, and `cluster2`)
 
