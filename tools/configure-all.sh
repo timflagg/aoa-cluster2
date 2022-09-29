@@ -18,7 +18,7 @@ if [[ ${environment_overlay} == "" ]]
 fi
 
 # configure
-for i in $(ls -l ../environment/ | grep -v ^total | awk '{print $9}'); do 
+for i in $(ls ../environment | sort -n); do 
   echo "starting ${i}"
   # deploy aoa wave
   ./configure-wave.sh ${i} ${environment_overlay} ${cluster_context}

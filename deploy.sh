@@ -46,7 +46,7 @@ cd ..
 ./tools/wait-for-rollout.sh deployment argocd-server argocd 20 ${cluster_context}
 
 # deploy app of app waves
-for i in $(ls -l environment/ | grep -v ^total | awk '{print $9}'); do 
+for i in $(ls environment | sort -n); do 
   echo "starting ${i}"
   # run init script if it exists
   [[ -f "environment/${i}/init.sh" ]] && ./environment/${i}/init.sh ${i} ${environment_overlay} ${cluster_context} ${github_username} ${repo_name} ${target_branch}
