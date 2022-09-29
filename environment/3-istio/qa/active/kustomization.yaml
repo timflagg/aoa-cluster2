@@ -10,3 +10,4 @@ patchesStrategicMerge:
 - patches/istio-base-1.14.3.yaml
 - patches/istiod-1.14.3.yaml
 - patches/grafana-1.14.3.yaml
+- patches/istio-eastwestgateway-1.14.3.yaml
