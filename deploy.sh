@@ -48,7 +48,7 @@ for i in $(ls environment | sort -n); do
 done
 
 # register agent
-./tools/register-agent.sh ${gloo_mesh_version} ${cluster_context} ${mgmt_context}
+./tools/register-agent.sh ${gloo_mesh_version}
 
 echo "END."
 
