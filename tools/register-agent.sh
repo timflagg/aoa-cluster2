@@ -5,11 +5,11 @@
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source $SCRIPT_DIR/../vars.txt
 
-# check to see if gloo mesh version variable was passed through, if not prompt for it
+# check to see if gloo_mesh_version variable was passed through, if not prompt for it
 if [[ ${gloo_mesh_version} == "" ]]
   then
-    # provide license key
-    echo "Please provide the gloo-mesh agent version to use:"
+    # provide gloo_mesh_version variable
+    echo "Please provide the gloo_mesh_version to use (i.e. 2.1.0-beta27):"
     read gloo_mesh_version
 fi
 
