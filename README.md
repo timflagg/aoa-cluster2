@@ -22,7 +22,7 @@ This repo provides a multitenant capable GitOps workflow structure that can be f
 
 This repo is meant to be deployed along with the following repos to create the entire High Level Architecture diagram below.
 - https://github.com/ably77/aoa-mgmt
-- https://github.com/ably77/aoa-cluster2
+- https://github.com/ably77/aoa-cluster1
 
 # High Level Architecture
 ![High Level Architecture](images/aoa-full-1a.png)
