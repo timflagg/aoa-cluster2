@@ -5,3 +5,6 @@ kind: Kustomization
 # list of resources to be Applied
 resources:
 - ../../base/active/
+
+patchesStrategicMerge:
+- patches/gloo-mesh-crds.yaml

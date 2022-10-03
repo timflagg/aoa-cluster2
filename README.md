@@ -11,7 +11,7 @@ This repo provides a multitenant capable GitOps workflow structure that can be f
     - istio 1.14.3
     - revision: 1-14
 - dev:
-    - gloo mesh 2.1.0-beta27
+    - gloo mesh 2.1.0-beta28
     - istio 1.15.0
     - revision: 1-15
 
