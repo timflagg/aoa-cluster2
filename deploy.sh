@@ -24,7 +24,7 @@ fi
 if [[ ${environment_overlay} == "" ]]
   then
     # provide environment overlay
-    echo "Please provide the environment overlay to use (i.e. prod, dev, qa):"
+    echo "Please provide the environment overlay to use (i.e. prod, dev):"
     read environment_overlay
 fi
 

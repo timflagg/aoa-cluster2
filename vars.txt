@@ -5,7 +5,7 @@
 # rename your context if necessary
 
 gloo_mesh_version=${1:-""}
-environment_overlay=${2:-""} # prod, qa, dev, base
+environment_overlay=${2:-""} # prod, dev, base
 cluster_context=${3:-cluster2}
 mgmt_context=${4:-mgmt}
 github_username=${5:-ably77}

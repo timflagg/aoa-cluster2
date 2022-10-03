@@ -2,7 +2,7 @@
 #set -e
 
 wave_name=${1:-""}
-environment_overlay=${2:-""} # prod, qa, dev, base
+environment_overlay=${2:-""} # prod, dev, base
 cluster_context=${3:-""}
 github_username=${4:-""}
 repo_name=${5:-""}
@@ -20,7 +20,7 @@ fi
 if [[ ${environment_overlay} == "" ]]
   then
     # provide environment overlay
-    echo "Please provide the environment overlay to use (i.e. prod, dev, qa):"
+    echo "Please provide the environment overlay to use (i.e. prod, dev):"
     read environment_overlay
 fi
 
