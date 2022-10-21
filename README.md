@@ -35,13 +35,11 @@ git submodule update --init
 
 Run:
 ```
-./aoa-tools/deploy.sh $LICENSE_KEY $environment_overlay       # deploys on mgmt cluster by default if no input
+./aoa-tools/deploy.sh $gloo_mesh_version $environment_overlay
 ```
 
-The script will prompt you for input if not provided
-
 ## Variables
-You can configure parameters used by the script in the `vars.txt`. This is particularily useful if you want to test an alternate repo branch or if you fork this repo.
+You can configure parameters used by the script in the `vars.txt`. The script will prompt you for input if not provided.
 ```
 gloo_mesh_version=${1:-""}
 environment_overlay=${2:-""} # prod, qa, dev, base
