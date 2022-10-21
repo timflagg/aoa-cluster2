@@ -28,9 +28,16 @@ This repo is meant to be deployed along with the following repos to create the e
 
 # Getting Started
 Run:
+This repo uses git submodules, so run the following command if contents of `aoa-tools` are missing
 ```
-./deploy.sh $gloo_mesh_version $environment_overlay $cluster_context 
+git submodule update --init
 ```
+
+Run:
+```
+./aoa-tools/deploy.sh $LICENSE_KEY $environment_overlay       # deploys on mgmt cluster by default if no input
+```
+
 The script will prompt you for input if not provided
 
 ## Variables
