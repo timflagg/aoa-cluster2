@@ -1,10 +1,10 @@
 kind: Certificate
 apiVersion: cert-manager.io/v1
 metadata:
-  name: gloo-mesh-agent-cluster2
+  name: gloo-agent
   namespace: gloo-mesh
 spec:
-  commonName: gloo-mesh-agent-cluster2
+  commonName: gloo-agent
   dnsNames:
     # Must match the cluster name used in the helm chart install
     - "cluster2"
@@ -15,7 +15,7 @@ spec:
     kind: Issuer
     name: relay-root-ca
   renewBefore: 8736h0m0s
-  secretName: gloo-mesh-agent-cluster2-tls-cert
+  secretName: gloo-agent-tls-cert
   usages:
     - digital signature
     - key encipherment
