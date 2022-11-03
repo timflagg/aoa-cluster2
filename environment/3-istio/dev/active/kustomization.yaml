@@ -5,9 +5,3 @@ kind: Kustomization
 # list of resources to be Applied
 resources:
 - ../../base/active/
-
-patchesStrategicMerge:
-- patches/istio-base-1.15.0.yaml
-- patches/istiod-1.15.0.yaml
-- patches/grafana-1-15.yaml
-- patches/istio-eastwestgateway-1.15.0.yaml

@@ -15,6 +15,3 @@ resources:
 - relay-identity-token-secret.yaml
 - relay-root-ca.yaml
 
-commonLabels:
-  istio.io/rev: 1-13
-
