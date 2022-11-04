@@ -4,6 +4,7 @@ kind: Kustomization
 
 # list of resources to be Applied
 resources:
+- clusterissuer.yaml
 - grafana.yaml
 - istio-base.yaml
 - istio-eastwestgateway.yaml

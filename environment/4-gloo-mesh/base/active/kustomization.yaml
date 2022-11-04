@@ -5,6 +5,5 @@ kind: Kustomization
 # list of resources to be Applied
 resources:
 - agent-cert.yaml
-- clusterissuer.yaml
 - gloo-mesh-crds.yaml
 - issuer.yaml
