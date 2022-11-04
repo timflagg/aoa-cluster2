@@ -51,6 +51,13 @@ spec:
           ISTIO_META_ROUTER_MODE: "sni-dnat"
           ISTIO_META_REQUESTED_NETWORK_VIEW: "network1"
         
+        podAnnotations
+          prometheus.io/port: "15020"
+          prometheus.io/scrape: "true"
+          prometheus.io/path: "/stats/prometheus"
+          inject.istio.io/templates: "gateway"
+          sidecar.istio.io/inject: "true"
+        
         # Labels to apply to all resources
         labels:
           istio.io/rev: 1-15
