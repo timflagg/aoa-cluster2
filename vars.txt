@@ -4,8 +4,8 @@
 # please use `kubectl config rename-contexts <current_context> <target_context>` to
 # rename your context if necessary
 
-gloo_mesh_version=${1:-""}
-environment_overlay=${2:-""} # prod, dev, base
+gloo_mesh_version=${1:-"2.1.2"}
+environment_overlay=${2:-"base"} # prod, dev, base
 cluster_context=${3:-cluster2}
 mgmt_context=${4:-mgmt}
 github_username=${5:-ably77}
