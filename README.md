@@ -6,6 +6,10 @@ This repo provides a multitenant capable GitOps workflow structure that can be f
     - gloo mesh 2.1.2
     - istio 1.15.3-solo (Helm)
     - revision: 1-15
+- ilcm:
+    - gloo mesh 2.1.2
+    - istio 1.15.3-solo (ILCM)
+    - revision: 1-15
 - m1:
     - gloo mesh 2.1.2
     - istio 1.15.3-solo-arm (Helm)
