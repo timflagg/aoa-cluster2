@@ -6,6 +6,7 @@ kind: Kustomization
 resources:
 - bookinfo-backends-ns.yaml
 - bookinfo-frontends-ns.yaml
+- gateway-ca.yaml
 - gloo-mesh-addons-ns.yaml
 - gloo-mesh-ns.yaml
 - httpbin-ns.yaml

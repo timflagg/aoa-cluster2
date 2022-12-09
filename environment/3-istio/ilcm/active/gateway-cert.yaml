@@ -1,7 +1,7 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: tls-secret-cert
+  name: gateway-cert
   namespace: istio-gateways
 spec:
   secretName: tls-secret
@@ -20,6 +20,6 @@ spec:
   dnsNames:
   - '*'
   issuerRef:
-    name: ca-issuer
+    name: gateway-ca
     kind: ClusterIssuer
     group: cert-manager.io
