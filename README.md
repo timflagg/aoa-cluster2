@@ -57,6 +57,10 @@ target_branch=${7:-HEAD}
 Note:
 - Although you may change the contexts where apps are deployed as describe above, the Gloo Mesh and Istio cluster names will remain stable references (i.e. `mgmt`, `cluster1`, and `cluster2`)
 
+### Youtube Demonstration of Multi Cluster
+Watch the process here:
+[![Watch the video](images/aoa-gmui-3a.png)](https://youtu.be/uIh83HbUL9Y)
+
 # App of Apps Explained
 The app-of-apps pattern uses a generic Argo Application to sync all manifests in a particular Git directory, rather than directly point to a Kustomize, YAML, or Helm configuration. Anything pushed into the `environment/<overlay>/active` directory is deployed by it's corresponding app-of-app
 
