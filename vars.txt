@@ -8,6 +8,6 @@ gloo_mesh_version=${1:-"2.1.2"}
 environment_overlay=${2:-"base"} # prod, dev, base
 cluster_context=${3:-cluster2}
 mgmt_context=${4:-mgmt}
-github_username=${5:-ably77}
+github_username=${5:-timflagg}
 repo_name=${6:-aoa-cluster2}
 target_branch=${7:-HEAD}
