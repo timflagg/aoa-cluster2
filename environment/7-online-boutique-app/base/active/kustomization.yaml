@@ -3,7 +3,7 @@ kind: Kustomization
 
 resources:
 - backend-apis-ns.yaml
-- cluster1-backend-apis.yaml
-- cluster1-web-ui.yaml
+- cluster2-backend-apis.yaml
+- cluster2-web-ui.yaml
 - web-ui-ns.yaml
 
